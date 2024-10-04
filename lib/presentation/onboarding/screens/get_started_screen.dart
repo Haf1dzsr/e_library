@@ -2,8 +2,11 @@ import 'package:e_library/common/constants/validators.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/common/widgets/custom_textformfield.dart';
+import 'package:e_library/data/models/user_model.dart';
 import 'package:e_library/presentation/navbar/screens/navbar_screen.dart';
+import 'package:e_library/presentation/onboarding/cubits/cubit/create_new_user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetStartedScreen extends StatelessWidget {
   GetStartedScreen({super.key});
@@ -68,19 +71,66 @@ class GetStartedScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        final UserModel user = UserModel(
+                          name: nameC.text,
+                          email: emailC.text,
+                        );
                         if (formKey.currentState!.validate()) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NavbarScreen(),
-                            ),
-                          );
+                          context
+                              .read<CreateNewUserCubit>()
+                              .createNewUser(user: user);
                         }
                       },
-                      child: Text(
-                        'Take me in',
-                        style: appTheme.textTheme.labelMedium!
-                            .copyWith(color: AppColor.white),
+                      child:
+                          BlocConsumer<CreateNewUserCubit, CreateNewUserState>(
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            success: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NavbarScreen(),
+                                ),
+                              );
+                              nameC.clear();
+                              emailC.clear();
+                            },
+                            error: (message) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: AppColor.error,
+                                  content: Text(
+                                    'Something went wrong $message',
+                                    style: appTheme.textTheme.labelMedium!
+                                        .copyWith(color: AppColor.white),
+                                  ),
+                                ),
+                              );
+                            },
+                            orElse: () {},
+                          );
+                        },
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            loading: () {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation(
+                                    AppColor.white,
+                                  ),
+                                ),
+                              );
+                            },
+                            orElse: () {
+                              return Text(
+                                'Take me in',
+                                style: appTheme.textTheme.labelMedium!.copyWith(
+                                  color: AppColor.white,
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ),
                   ),
