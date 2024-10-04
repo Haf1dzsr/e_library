@@ -6,7 +6,7 @@ class AppColor {
   static const Color accent = Color(0xFF76FF03);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color error = Color(0xFFBA1A1A);
-  static const Color grey = Color(0xffE5E5E5);
+  static const Color grey = Colors.grey;
   static const Color white = Color(0xffFFFFFF);
   static const Color black = Color(0xff000000);
 

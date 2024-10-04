@@ -1,7 +1,7 @@
-import 'dart:developer';
 import 'package:e_library/common/constants/images.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/presentation/onboarding/screens/get_started_screen.dart';
 import 'package:e_library/presentation/onboarding/widgets/onboarding_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -89,13 +89,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                     onPressed: () {
-                      log('Current index: ${currentIndex.value}');
                       currentIndex.value != 1
                           ? pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeIn,
                             )
-                          : null;
+                          : Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GetStartedScreen(),
+                              ),
+                            );
                     },
                     child: Text(
                       currentIndex.value == 0 ? 'Next' : 'Get started',

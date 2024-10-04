@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              'E-Library',
+              'e-Library',
               style: appTheme.textTheme.headlineLarge!.copyWith(
                 color: AppColor.white.withOpacity(0.7),
               ),
