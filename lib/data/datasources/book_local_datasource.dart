@@ -23,6 +23,27 @@ class BookLocalDatasource {
         .toList();
   }
 
+  Future<List<BookModel>> getBooksByGenre(String genre) async {
+    Database db = await DatabaseHelper.instance.database;
+
+    if (genre == 'All') {
+      return (await db.query('books'))
+          .map((book) => BookModel.fromMap(book))
+          .toList();
+    } else {
+      return (await db.query('books', where: 'genre = ?', whereArgs: [genre]))
+          .map((book) => BookModel.fromMap(book))
+          .toList();
+    }
+  }
+
+  Future<List<BookModel>> getNewestBooks() async {
+    Database db = await DatabaseHelper.instance.database;
+    return (await db.query('books', limit: 4, orderBy: 'id DESC'))
+        .map((book) => BookModel.fromMap(book))
+        .toList();
+  }
+
   Future<BookModel> getBook(int id) async {
     Database db = await DatabaseHelper.instance.database;
     List<Map<String, dynamic>> books =

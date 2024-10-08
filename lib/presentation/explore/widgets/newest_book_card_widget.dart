@@ -1,12 +1,17 @@
-import 'package:e_library/common/constants/images.dart';
+import 'dart:io';
+
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/data/models/book_model.dart';
 import 'package:flutter/material.dart';
 
 class NewestBookCardWidget extends StatelessWidget {
   const NewestBookCardWidget({
     super.key,
+    required this.book,
   });
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +23,22 @@ class NewestBookCardWidget extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                Images.onBoardingEnjoy,
+              child: Image.file(
+                File(book.bookCover),
                 height: MediaQuery.sizeOf(context).height / 4.75,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(
+                    Icons.image_not_supported,
+                    size: MediaQuery.sizeOf(context).height / 7.75,
+                  );
+                },
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              'The Great Gatsby',
+              book.title,
               maxLines: 2,
               textAlign: TextAlign.center,
               overflow: TextOverflow.visible,
@@ -38,7 +49,7 @@ class NewestBookCardWidget extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'F. Scott Fitzgerald',
+              book.author,
               style: appTheme.textTheme.bodyMedium!.copyWith(
                 color: AppColor.textSecondary,
               ),

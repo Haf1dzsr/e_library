@@ -1,17 +1,26 @@
 import 'package:e_library/common/constants/images.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/presentation/explore/cubits/book_cubit/book_cubit.dart';
+import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_book_cubit.dart';
 import 'package:e_library/presentation/explore/screens/upload_book_screen.dart';
 import 'package:e_library/presentation/explore/widgets/category_widget.dart';
 import 'package:e_library/presentation/explore/widgets/explore_book_card_widget.dart';
 import 'package:e_library/presentation/explore/widgets/newest_book_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ExploreScreen extends StatelessWidget {
-  ExploreScreen({super.key});
+class ExploreScreen extends StatefulWidget {
+  const ExploreScreen({super.key});
 
-  ValueNotifier<String> selectedCategory = ValueNotifier('All');
-  final List<String> categories = [
+  @override
+  State<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
+  ValueNotifier<String> selectedGenre = ValueNotifier('All');
+
+  final List<String> genres = [
     'All',
     'Fiction',
     'Non-Fiction',
@@ -21,6 +30,13 @@ class ExploreScreen extends StatelessWidget {
     'Fantasy',
     'Biography'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<BookCubit>().getNewestBooks();
+    context.read<QueryBookCubit>().getExploreBooks(selectedGenre.value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,14 +135,52 @@ class ExploreScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     SizedBox(
                       height: MediaQuery.sizeOf(context).height / 3.725,
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: 16),
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return const NewestBookCardWidget();
+                      child: BlocBuilder<BookCubit, BookState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            loading: () {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColor.primary,
+                                  ),
+                                ),
+                              );
+                            },
+                            success: (books) {
+                              return ListView.separated(
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(width: 16),
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: books.length,
+                                itemBuilder: (context, index) {
+                                  final book = books[index];
+                                  return NewestBookCardWidget(
+                                    book: book,
+                                  );
+                                },
+                              );
+                            },
+                            error: (message) {
+                              return Center(
+                                child: Text(
+                                  message,
+                                  style: appTheme.textTheme.bodyMedium!
+                                      .copyWith(color: AppColor.textSecondary),
+                                ),
+                              );
+                            },
+                            orElse: () {
+                              return Center(
+                                child: Text(
+                                  'Failed to get newest books',
+                                  style: appTheme.textTheme.bodyMedium!
+                                      .copyWith(color: AppColor.textSecondary),
+                                ),
+                              );
+                            },
+                          );
                         },
                       ),
                     ),
@@ -147,19 +201,19 @@ class ExploreScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ValueListenableBuilder<String>(
-                      valueListenable: selectedCategory,
+                      valueListenable: selectedGenre,
                       builder: (context, value, _) {
                         return SizedBox(
                           height: MediaQuery.sizeOf(context).height * 0.035,
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: categories.length,
+                            itemCount: genres.length,
                             itemBuilder: (context, index) {
-                              final category = categories[index];
+                              final category = genres[index];
                               final isSelected = value == category;
                               return CategoryWidget(
-                                selectedCategory: selectedCategory,
+                                selectedCategory: selectedGenre,
                                 category: category,
                                 isSelected: isSelected,
                               );
@@ -169,15 +223,63 @@ class ExploreScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 16),
-                    ListView.separated(
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      scrollDirection: Axis.vertical,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return const ExploreBookCardWidget();
+                    BlocBuilder<QueryBookCubit, QueryBookState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          error: (message) {
+                            return Center(
+                              child: Text(
+                                message,
+                                style: appTheme.textTheme.bodyMedium!
+                                    .copyWith(color: AppColor.textSecondary),
+                              ),
+                            );
+                          },
+                          loading: () {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColor.primary,
+                                ),
+                              ),
+                            );
+                          },
+                          success: (books) {
+                            return books.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      'No books found for this genre',
+                                      style: appTheme.textTheme.bodyMedium!
+                                          .copyWith(
+                                              color: AppColor.textSecondary),
+                                    ),
+                                  )
+                                : ListView.separated(
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(height: 16),
+                                    scrollDirection: Axis.vertical,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: books.length,
+                                    itemBuilder: (context, index) {
+                                      final book = books[index];
+                                      return ExploreBookCardWidget(
+                                        book: book,
+                                      );
+                                    },
+                                  );
+                          },
+                          orElse: () {
+                            return Center(
+                              child: Text(
+                                'Failed to get explore books',
+                                style: appTheme.textTheme.bodyMedium!
+                                    .copyWith(color: AppColor.textSecondary),
+                              ),
+                            );
+                          },
+                        );
                       },
                     ),
                   ],

@@ -1,6 +1,8 @@
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_book_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({
@@ -19,6 +21,7 @@ class CategoryWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         selectedCategory.value = category;
+        context.read<QueryBookCubit>().getExploreBooks(category);
       },
       child: Container(
         alignment: Alignment.center,

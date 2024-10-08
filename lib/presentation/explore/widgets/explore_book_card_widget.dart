@@ -1,10 +1,17 @@
-import 'package:e_library/common/constants/images.dart';
+import 'dart:io';
+
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/data/models/book_model.dart';
 import 'package:flutter/material.dart';
 
 class ExploreBookCardWidget extends StatelessWidget {
-  const ExploreBookCardWidget({super.key});
+  const ExploreBookCardWidget({
+    super.key,
+    required this.book,
+  });
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +23,20 @@ class ExploreBookCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(24),
-                    child: Image.asset(
-                      Images.onBoardingWelcome,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Image.asset(
-                        Images.onBoardingWelcome,
-                      ),
-                      height: MediaQuery.sizeOf(context).height * 0.2,
-                    ),
-                  ),
-                ],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.file(
+                  File(book.bookCover),
+                  width: MediaQuery.sizeOf(context).width * 0.275,
+                  height: MediaQuery.sizeOf(context).height * 0.2,
+                  fit: BoxFit.fitHeight,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(
+                      Icons.image_not_supported,
+                      size: MediaQuery.sizeOf(context).height / 7.75,
+                    );
+                  },
+                ),
               ),
               const SizedBox(width: 16),
               Stack(
@@ -38,14 +45,14 @@ class ExploreBookCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Atomic Habits',
+                        book.title,
                         style: appTheme.textTheme.titleMedium!.copyWith(
                           color: AppColor.textPrimary,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
-                        'By: James Clear',
+                        'By: ${book.author}',
                         style: appTheme.textTheme.bodyMedium!.copyWith(
                           color: AppColor.textSecondary,
                         ),
@@ -53,8 +60,9 @@ class ExploreBookCardWidget extends StatelessWidget {
                       const SizedBox(height: 4),
                       SizedBox(
                         width: MediaQuery.sizeOf(context).width * 0.603,
+                        height: MediaQuery.sizeOf(context).height * 0.12,
                         child: Text(
-                          'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                          book.synopsis,
                           maxLines: 6,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.justify,

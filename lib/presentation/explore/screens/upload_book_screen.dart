@@ -6,7 +6,7 @@ import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/common/widgets/custom_dropdown.dart';
 import 'package:e_library/common/widgets/custom_textformfield.dart';
 import 'package:e_library/data/models/book_model.dart';
-import 'package:e_library/presentation/explore/cubits/cubit/upload_book_cubit.dart';
+import 'package:e_library/presentation/explore/cubits/upload_book_cubit/upload_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

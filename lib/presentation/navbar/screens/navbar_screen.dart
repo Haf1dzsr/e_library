@@ -8,7 +8,7 @@ class NavbarScreen extends StatelessWidget {
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   final List<Widget> _pages = [
-    ExploreScreen(),
+    const ExploreScreen(),
     const Center(child: Text('Search')),
     const Center(child: Text('Favorite')),
     const Center(child: Text('Profile')),
