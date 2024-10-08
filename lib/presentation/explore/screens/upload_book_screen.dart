@@ -6,6 +6,8 @@ import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/common/widgets/custom_dropdown.dart';
 import 'package:e_library/common/widgets/custom_textformfield.dart';
 import 'package:e_library/data/models/book_model.dart';
+import 'package:e_library/presentation/explore/cubits/book_cubit/book_cubit.dart';
+import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_book_cubit.dart';
 import 'package:e_library/presentation/explore/cubits/upload_book_cubit/upload_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,6 +111,7 @@ class UploadBookScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 CustomTextFormField(
+                  maxLines: 7,
                   textInputAction: TextInputAction.next,
                   label: 'Synopsis',
                   hint: "Enter book's synopsis",
@@ -127,7 +130,7 @@ class UploadBookScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 CustomTextFormField(
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   label: 'Published Year',
                   hint: "Enter book's published year",
                   controller: publishedYearC,
@@ -161,7 +164,8 @@ class UploadBookScreen extends StatelessWidget {
                     return state.maybeWhen(
                       orElse: () {
                         return CustomTextFormField(
-                          textInputAction: TextInputAction.next,
+                          readOnly: true,
+                          textInputAction: TextInputAction.done,
                           maxLines: 1,
                           suffixIcon: IconButton(
                             icon: const Icon(Icons.camera_alt_outlined),
@@ -206,7 +210,8 @@ class UploadBookScreen extends StatelessWidget {
                     return state.maybeWhen(
                       orElse: () {
                         return CustomTextFormField(
-                          textInputAction: TextInputAction.next,
+                          readOnly: true,
+                          textInputAction: TextInputAction.done,
                           maxLines: 1,
                           suffixIcon: IconButton(
                             icon: const Icon(Icons.file_upload),
@@ -224,7 +229,7 @@ class UploadBookScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: MediaQuery.sizeOf(context).height * 0.1),
               ],
             ),
           ),
@@ -244,6 +249,8 @@ class UploadBookScreen extends StatelessWidget {
                     content: Text('Book Uploaded'),
                   ),
                 );
+                context.read<BookCubit>().getNewestBooks();
+                context.read<QueryBookCubit>().getExploreBooks('All');
                 Navigator.pop(context);
               },
               error: (message) {

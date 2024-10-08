@@ -256,7 +256,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                   )
                                 : ListView.separated(
                                     separatorBuilder: (context, index) =>
-                                        const SizedBox(height: 16),
+                                        const SizedBox(height: 8),
                                     scrollDirection: Axis.vertical,
                                     physics:
                                         const NeverScrollableScrollPhysics(),
