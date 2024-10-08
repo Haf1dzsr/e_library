@@ -1,6 +1,7 @@
 import 'package:e_library/common/constants/images.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/presentation/explore/screens/upload_book_screen.dart';
 import 'package:e_library/presentation/explore/widgets/category_widget.dart';
 import 'package:e_library/presentation/explore/widgets/explore_book_card_widget.dart';
 import 'package:e_library/presentation/explore/widgets/newest_book_card_widget.dart';
@@ -183,6 +184,25 @@ class ExploreScreen extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UploadBookScreen(),
+            ),
+          );
+        },
+        icon: const Icon(Icons.add),
+        backgroundColor: AppColor.primary,
+        label: Text(
+          'Upload Book',
+          style: appTheme.textTheme.labelMedium!.copyWith(
+            color: AppColor.white,
           ),
         ),
       ),

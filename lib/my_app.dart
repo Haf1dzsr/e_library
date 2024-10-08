@@ -1,4 +1,5 @@
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/presentation/explore/cubits/cubit/upload_book_cubit.dart';
 import 'package:e_library/presentation/onboarding/cubits/cubit/create_new_user_cubit.dart';
 import 'package:e_library/presentation/splash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => CreateNewUserCubit(),
+        ),
+        BlocProvider(
+          create: (context) => UploadBookCubit(),
         ),
       ],
       child: MaterialApp(
