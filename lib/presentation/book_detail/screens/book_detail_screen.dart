@@ -6,6 +6,7 @@ import 'package:e_library/presentation/book_detail/cubits/add_book_to_favorite_c
 import 'package:e_library/presentation/book_detail/cubits/book_detail_cubit/book_detail_cubit.dart';
 import 'package:e_library/presentation/book_detail/widgets/info_tile_widget.dart';
 import 'package:e_library/presentation/book_detail/widgets/vertical_divider_widget.dart';
+import 'package:e_library/presentation/favorite/cubits/favorite_book_cubit/favorite_book_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -187,6 +188,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                             ),
                           );
                           context.read<BookDetailCubit>().refresh(widget.id);
+                          context.read<FavoriteBookCubit>().getFavoriteBooks();
                         },
                         orElse: () {},
                       );
