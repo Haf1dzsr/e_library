@@ -2,6 +2,7 @@ import 'package:e_library/common/constants/validators.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/common/widgets/custom_textformfield.dart';
+import 'package:e_library/data/datasources/user_local_datasource.dart';
 import 'package:e_library/data/models/user_model.dart';
 import 'package:e_library/presentation/navbar/screens/navbar_screen.dart';
 import 'package:e_library/presentation/onboarding/cubits/cubit/create_new_user_cubit.dart';
@@ -70,15 +71,34 @@ class GetStartedScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         final UserModel user = UserModel(
                           name: nameC.text,
                           email: emailC.text,
+                          age: 0,
+                          profession: '',
+                          cityAddress: '',
+                          photo: '',
                         );
-                        if (formKey.currentState!.validate()) {
-                          context
-                              .read<CreateNewUserCubit>()
-                              .createNewUser(user: user);
+
+                        List<UserModel> users =
+                            await UserLocalDataSource.instance.getUsers();
+                        if (context.mounted) {
+                          if (users.isNotEmpty) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NavbarScreen(),
+                              ),
+                            );
+                            nameC.clear();
+                            emailC.clear();
+                          }
+                          if (formKey.currentState!.validate()) {
+                            context
+                                .read<CreateNewUserCubit>()
+                                .createNewUser(user: user);
+                          }
                         }
                       },
                       child:

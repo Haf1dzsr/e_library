@@ -16,16 +16,26 @@ class UserLocalDataSource {
     return await db.insert('users', user.toMap());
   }
 
-  Future<List<Map<String, dynamic>>> getUsers() async {
+  Future<List<UserModel>> getUsers() async {
     Database db = await DatabaseHelper.instance.database;
-    return await db.query('users');
+    List<Map<String, dynamic>> users = await db.query('users');
+    return users.map((user) => UserModel.fromMap(user)).toList();
   }
 
-  Future<Map<String, dynamic>> getUser(int id) async {
+  Future<UserModel?> getUser() async {
     Database db = await DatabaseHelper.instance.database;
-    List<Map<String, dynamic>> users =
-        await db.query('users', where: 'id = ?', whereArgs: [id]);
-    return users.first;
+    List<Map<String, dynamic>> users = await db.query('users');
+    if (users.isEmpty) {
+      return null;
+    } else {
+      return UserModel.fromMap(users.first);
+    }
+  }
+
+  Future<int> updateUserPhoto(String photo, int id) async {
+    Database db = await DatabaseHelper.instance.database;
+    return await db.update('users', {'photo': photo},
+        where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int> updateUser(UserModel user, int id) async {

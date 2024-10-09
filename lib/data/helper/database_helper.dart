@@ -33,6 +33,9 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         email TEXT,
+        age INTEGER,
+        profession TEXT,
+        city_address TEXT,
         photo TEXT
       )
     ''');
