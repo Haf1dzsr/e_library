@@ -1,6 +1,7 @@
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/presentation/explore/screens/explore_screen.dart';
 import 'package:e_library/presentation/favorite/screens/favorite_screen.dart';
+import 'package:e_library/presentation/profile/screens/profile_screen.dart';
 import 'package:e_library/presentation/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class NavbarScreen extends StatelessWidget {
     const ExploreScreen(),
     const SearchScreen(),
     const FavoriteScreen(),
-    const Center(child: Text('Profile')),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
