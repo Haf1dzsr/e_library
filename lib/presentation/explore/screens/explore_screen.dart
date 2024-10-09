@@ -9,6 +9,7 @@ import 'package:e_library/presentation/explore/screens/upload_book_screen.dart';
 import 'package:e_library/presentation/explore/widgets/category_widget.dart';
 import 'package:e_library/presentation/explore/widgets/explore_book_card_widget.dart';
 import 'package:e_library/presentation/explore/widgets/newest_book_card_widget.dart';
+import 'package:e_library/presentation/navbar/cubits/navbar_cubit/navbar_cubit.dart';
 import 'package:e_library/presentation/profile/cubits/profile_cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -141,7 +142,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                               BorderRadius.circular(10),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        context
+                                            .read<NavbarCubit>()
+                                            .changeIndex(3);
+                                      },
                                       child: Text(
                                         'Go to profile',
                                         style: appTheme.textTheme.labelMedium!

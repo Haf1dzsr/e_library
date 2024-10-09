@@ -5,6 +5,7 @@ import 'package:e_library/presentation/explore/cubits/book_cubit/book_cubit.dart
 import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_book_cubit.dart';
 import 'package:e_library/presentation/explore/cubits/upload_book_cubit/upload_book_cubit.dart';
 import 'package:e_library/presentation/favorite/cubits/favorite_book_cubit/favorite_book_cubit.dart';
+import 'package:e_library/presentation/navbar/cubits/navbar_cubit/navbar_cubit.dart';
 import 'package:e_library/presentation/onboarding/cubits/cubit/create_new_user_cubit.dart';
 import 'package:e_library/presentation/profile/cubits/profile_cubit/profile_cubit.dart';
 import 'package:e_library/presentation/search/cubits/search_book_cubit/search_book_cubit.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProfileCubit(),
+        ),
+        BlocProvider(
+          create: (context) => NavbarCubit()..changeIndex(0),
         ),
       ],
       child: MaterialApp(
