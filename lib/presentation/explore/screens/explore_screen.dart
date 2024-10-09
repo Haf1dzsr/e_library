@@ -285,6 +285,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: MediaQuery.sizeOf(context).height * 0.085),
             ],
           ),
         ),

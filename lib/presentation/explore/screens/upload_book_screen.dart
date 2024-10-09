@@ -72,7 +72,11 @@ class UploadBookScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: MediaQuery.sizeOf(context).height * 0.1,
+        ),
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
@@ -229,7 +233,6 @@ class UploadBookScreen extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: MediaQuery.sizeOf(context).height * 0.1),
               ],
             ),
           ),
