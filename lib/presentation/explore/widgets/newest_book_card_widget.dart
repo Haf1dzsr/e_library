@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/data/models/book_model.dart';
+import 'package:e_library/presentation/explore/screens/book_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class NewestBookCardWidget extends StatelessWidget {
@@ -16,7 +17,14 @@ class NewestBookCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BookDetailScreen(book: book),
+          ),
+        );
+      },
       child: SizedBox(
         width: MediaQuery.sizeOf(context).width * 0.325,
         child: Column(
