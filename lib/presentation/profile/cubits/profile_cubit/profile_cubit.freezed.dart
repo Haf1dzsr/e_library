@@ -21,6 +21,7 @@ mixin _$ProfileState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -31,6 +32,7 @@ mixin _$ProfileState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -41,6 +43,7 @@ mixin _$ProfileState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -52,6 +55,7 @@ mixin _$ProfileState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -62,6 +66,7 @@ mixin _$ProfileState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -72,6 +77,7 @@ mixin _$ProfileState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,
@@ -139,6 +145,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -152,6 +159,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -165,6 +173,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -182,6 +191,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -195,6 +205,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -208,6 +219,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,
@@ -265,6 +277,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -278,6 +291,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -291,6 +305,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -308,6 +323,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -321,6 +337,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -334,6 +351,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,
@@ -417,6 +435,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -430,6 +449,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -443,6 +463,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -460,6 +481,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -473,6 +495,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -486,6 +509,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,
@@ -508,6 +532,138 @@ abstract class _Loaded implements ProfileState {
 }
 
 /// @nodoc
+abstract class _$$SuccessImplCopyWith<$Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
+      __$$SuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SuccessImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$SuccessImpl>
+    implements _$$SuccessImplCopyWith<$Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SuccessImpl implements _Success {
+  const _$SuccessImpl();
+
+  @override
+  String toString() {
+    return 'ProfileState.success()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
+    required TResult Function(File image) imagePicked,
+    required TResult Function(String message) imageNotPicked,
+    required TResult Function(String message) error,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
+    TResult? Function(File image)? imagePicked,
+    TResult? Function(String message)? imageNotPicked,
+    TResult? Function(String message)? error,
+  }) {
+    return success?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
+    TResult Function(File image)? imagePicked,
+    TResult Function(String message)? imageNotPicked,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_ImagePicked value) imagePicked,
+    required TResult Function(_ImageNotPicked value) imageNotPicked,
+    required TResult Function(_Error value) error,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_ImagePicked value)? imagePicked,
+    TResult? Function(_ImageNotPicked value)? imageNotPicked,
+    TResult? Function(_Error value)? error,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_ImagePicked value)? imagePicked,
+    TResult Function(_ImageNotPicked value)? imageNotPicked,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements ProfileState {
+  const factory _Success() = _$SuccessImpl;
+}
+
+/// @nodoc
 abstract class _$$ImagePickedImplCopyWith<$Res> {
   factory _$$ImagePickedImplCopyWith(
           _$ImagePickedImpl value, $Res Function(_$ImagePickedImpl) then) =
@@ -527,10 +683,10 @@ class __$$ImagePickedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? image = freezed,
+    Object? image = null,
   }) {
     return _then(_$ImagePickedImpl(
-      freezed == image
+      null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as File,
@@ -556,12 +712,11 @@ class _$ImagePickedImpl implements _ImagePicked {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ImagePickedImpl &&
-            const DeepCollectionEquality().equals(other.image, image));
+            (identical(other.image, image) || other.image == image));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(image));
+  int get hashCode => Object.hash(runtimeType, image);
 
   @JsonKey(ignore: true)
   @override
@@ -575,6 +730,7 @@ class _$ImagePickedImpl implements _ImagePicked {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -588,6 +744,7 @@ class _$ImagePickedImpl implements _ImagePicked {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -601,6 +758,7 @@ class _$ImagePickedImpl implements _ImagePicked {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -618,6 +776,7 @@ class _$ImagePickedImpl implements _ImagePicked {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -631,6 +790,7 @@ class _$ImagePickedImpl implements _ImagePicked {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -644,6 +804,7 @@ class _$ImagePickedImpl implements _ImagePicked {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,
@@ -733,6 +894,7 @@ class _$ImageNotPickedImpl implements _ImageNotPicked {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -746,6 +908,7 @@ class _$ImageNotPickedImpl implements _ImageNotPicked {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -759,6 +922,7 @@ class _$ImageNotPickedImpl implements _ImageNotPicked {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -776,6 +940,7 @@ class _$ImageNotPickedImpl implements _ImageNotPicked {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -789,6 +954,7 @@ class _$ImageNotPickedImpl implements _ImageNotPicked {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -802,6 +968,7 @@ class _$ImageNotPickedImpl implements _ImageNotPicked {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,
@@ -890,6 +1057,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(UserModel user) loaded,
+    required TResult Function() success,
     required TResult Function(File image) imagePicked,
     required TResult Function(String message) imageNotPicked,
     required TResult Function(String message) error,
@@ -903,6 +1071,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel user)? loaded,
+    TResult? Function()? success,
     TResult? Function(File image)? imagePicked,
     TResult? Function(String message)? imageNotPicked,
     TResult? Function(String message)? error,
@@ -916,6 +1085,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(UserModel user)? loaded,
+    TResult Function()? success,
     TResult Function(File image)? imagePicked,
     TResult Function(String message)? imageNotPicked,
     TResult Function(String message)? error,
@@ -933,6 +1103,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
     required TResult Function(_ImagePicked value) imagePicked,
     required TResult Function(_ImageNotPicked value) imageNotPicked,
     required TResult Function(_Error value) error,
@@ -946,6 +1117,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Success value)? success,
     TResult? Function(_ImagePicked value)? imagePicked,
     TResult? Function(_ImageNotPicked value)? imageNotPicked,
     TResult? Function(_Error value)? error,
@@ -959,6 +1131,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
     TResult Function(_ImagePicked value)? imagePicked,
     TResult Function(_ImageNotPicked value)? imageNotPicked,
     TResult Function(_Error value)? error,

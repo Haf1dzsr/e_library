@@ -270,19 +270,28 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               );
                             },
                             success: (books) {
-                              return ListView.separated(
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(width: 16),
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: books.length,
-                                itemBuilder: (context, index) {
-                                  final book = books[index];
-                                  return NewestBookCardWidget(
-                                    book: book,
-                                  );
-                                },
-                              );
+                              return books.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                        'No books found',
+                                        style: appTheme.textTheme.bodyMedium!
+                                            .copyWith(
+                                                color: AppColor.textSecondary),
+                                      ),
+                                    )
+                                  : ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(width: 16),
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: books.length,
+                                      itemBuilder: (context, index) {
+                                        final book = books[index];
+                                        return NewestBookCardWidget(
+                                          book: book,
+                                        );
+                                      },
+                                    );
                             },
                             error: (message) {
                               return Center(

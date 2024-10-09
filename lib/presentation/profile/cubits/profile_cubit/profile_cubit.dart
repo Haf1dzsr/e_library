@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:e_library/data/datasources/user_local_datasource.dart';
+import 'package:e_library/data/helper/database_helper.dart';
 import 'package:e_library/data/models/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -58,6 +59,17 @@ class ProfileCubit extends Cubit<ProfileState> {
       }
     } catch (e) {
       emit(ProfileState.error('Failed to pick image: $e'));
+    }
+  }
+
+  Future<void> logout() async {
+    emit(const ProfileState.loading());
+    try {
+      await DatabaseHelper.instance.clearUsersTable();
+      await DatabaseHelper.instance.clearBooksTable();
+      emit(const ProfileState.success());
+    } catch (e) {
+      emit(ProfileState.error('Failed to logout: $e'));
     }
   }
 }

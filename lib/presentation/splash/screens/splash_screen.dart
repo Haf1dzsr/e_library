@@ -1,6 +1,9 @@
 import 'package:e_library/common/constants/images.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/data/datasources/user_local_datasource.dart';
+import 'package:e_library/data/models/user_model.dart';
+import 'package:e_library/presentation/navbar/screens/navbar_screen.dart';
 import 'package:e_library/presentation/onboarding/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +20,24 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(
       const Duration(seconds: 2),
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const OnboardingScreen(),
-          ),
-        );
+      () async {
+        List<UserModel> users = await UserLocalDataSource.instance.getUsers();
+
+        if (users.isNotEmpty) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NavbarScreen(),
+            ),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const OnboardingScreen(),
+            ),
+          );
+        }
       },
     );
   }

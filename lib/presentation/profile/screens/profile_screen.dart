@@ -36,18 +36,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
               .copyWith(color: AppColor.white),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => GetStartedScreen(),
-                ),
+          BlocListener<ProfileCubit, ProfileState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                success: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GetStartedScreen(),
+                    ),
+                  );
+                },
+                error: (message) {
+                  showDialog(
+                    context: context,
+                    builder: (ctx) {
+                      return AlertDialog(
+                        title: Text(
+                          'Logout Failed',
+                          style: appTheme.textTheme.bodyMedium!
+                              .copyWith(color: AppColor.textPrimary),
+                        ),
+                        content: Text(message),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                orElse: () {},
               );
             },
-            icon: const Icon(
-              Icons.logout_rounded,
-              color: AppColor.white,
+            child: IconButton(
+              onPressed: () async {
+                showDialog(
+                  context: context,
+                  builder: (ctx) {
+                    return AlertDialog(
+                      title: const Text('Logout'),
+                      content: const Text(
+                          'Are you sure you want to logout?\nLogout will remove all your data.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: appTheme.textTheme.labelMedium!.copyWith(
+                              color: AppColor.textSecondary,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            context.read<ProfileCubit>().logout();
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Logout',
+                            style: appTheme.textTheme.labelMedium!.copyWith(
+                              color: AppColor.error,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.logout_rounded,
+                color: AppColor.white,
+              ),
             ),
           ),
         ],
