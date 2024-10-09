@@ -239,7 +239,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     height: MediaQuery.sizeOf(context).height * 0.06,
                     width: MediaQuery.sizeOf(context).width * 0.775,
                     child: FloatingActionButton.extended(
-                      onPressed: () {},
+                      onPressed: () {
+                        context
+                            .read<BookDetailCubit>()
+                            .openBookFile(book.bookFile, book.id!);
+                      },
                       heroTag: 'startReading',
                       backgroundColor: AppColor.primary,
                       label: Text(

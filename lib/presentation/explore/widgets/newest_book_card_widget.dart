@@ -47,7 +47,7 @@ class NewestBookCardWidget extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               book.title,
-              maxLines: 2,
+              maxLines: 1,
               textAlign: TextAlign.center,
               overflow: TextOverflow.visible,
               style: appTheme.textTheme.titleMedium!.copyWith(
