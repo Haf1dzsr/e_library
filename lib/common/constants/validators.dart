@@ -11,16 +11,32 @@ class Validator {
   static String? emailValidator(String? value) {
     final regex = RegExp(emailRegexPattern);
     if (value == null || value.isEmpty) {
-      return 'Email tidak boleh kosong';
+      return 'Email is required';
     } else if (!regex.hasMatch(value)) {
-      return 'Email tidak valid';
+      return 'Email is not valid';
     }
     return null;
   }
 
   static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Nama tidak boleh kosong';
+      return 'Name is required';
+    }
+    return null;
+  }
+
+  static String? numberValidator(String? value, String fieldName) {
+    if (value == null || value.isEmpty) {
+      return '$fieldName is required';
+    } else if (value.contains(RegExp(r'[a-zA-Z]'))) {
+      return '$fieldName must be a number';
+    }
+    return null;
+  }
+
+  static String? fieldValidator(String? value, String fieldName) {
+    if (value == null || value.isEmpty) {
+      return '$fieldName is required';
     }
     return null;
   }

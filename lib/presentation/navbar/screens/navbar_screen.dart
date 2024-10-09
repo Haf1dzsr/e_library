@@ -1,4 +1,5 @@
 import 'package:e_library/common/themes/app_color.dart';
+import 'package:e_library/presentation/explore/screens/explore_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavbarScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class NavbarScreen extends StatelessWidget {
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   final List<Widget> _pages = [
-    const Center(child: Text('Explore')),
+    const ExploreScreen(),
     const Center(child: Text('Search')),
     const Center(child: Text('Favorite')),
     const Center(child: Text('Profile')),

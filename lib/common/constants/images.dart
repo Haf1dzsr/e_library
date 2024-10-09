@@ -3,4 +3,5 @@ class Images {
   static const String onBoardingWelcome =
       'assets/images/onboarding_welcome.jpg';
   static const String onBoardingEnjoy = 'assets/images/onboarding_enjoy.jpg';
+  static const String avatar = 'assets/images/avatar.png';
 }

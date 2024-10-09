@@ -1,4 +1,3 @@
-import 'package:e_library/data/models/user_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -19,7 +18,7 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'users.db');
+    String path = join(await getDatabasesPath(), 'e-library.db');
 
     return await openDatabase(
       path,
@@ -37,37 +36,30 @@ class DatabaseHelper {
         photo TEXT
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE books (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        book_file TEXT,
+        book_cover TEXT,
+        title TEXT,
+        author TEXT,
+        genre TEXT,
+        page_total INTEGER,
+        synopsis TEXT,
+        published_year INTEGER,
+        is_favorited INTEGER
+      )
+    ''');
   }
 
-  Future<int> insertUser(UserModel user) async {
-    Database db = await database;
-    return await db.insert('users', user.toMap());
-  }
-
-  Future<List<Map<String, dynamic>>> getUsers() async {
-    Database db = await database;
-    return await db.query('users');
-  }
-
-  Future<Map<String, dynamic>> getUser(int id) async {
-    Database db = await database;
-    List<Map<String, dynamic>> users =
-        await db.query('users', where: 'id = ?', whereArgs: [id]);
-    return users.first;
-  }
-
-  Future<int> updateUser(Map<String, dynamic> user, int id) async {
-    Database db = await database;
-    return await db.update('users', user, where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> deleteUser(int id) async {
-    Database db = await database;
-    return await db.delete('users', where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<void> clearProjectTable() async {
+  Future<void> clearUsersTable() async {
     Database db = await instance.database;
     await db.delete('users');
+  }
+
+  Future<void> clearBooksTable() async {
+    Database db = await instance.database;
+    await db.delete('books');
   }
 }

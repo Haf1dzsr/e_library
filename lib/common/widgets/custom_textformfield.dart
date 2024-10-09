@@ -16,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final Widget? icon;
   final bool? isError;
+  final bool? readOnly;
 
   const CustomTextFormField({
     super.key,
@@ -33,6 +34,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.icon,
     this.isError = false,
+    this.readOnly = false,
   });
 
   @override
@@ -86,6 +88,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       ),
                 ),
                 TextFormField(
+                  readOnly: widget.readOnly!,
                   controller: widget.controller,
                   obscureText: widget.obscureText!,
                   maxLength: widget.maxLength,

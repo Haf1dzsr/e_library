@@ -1,4 +1,9 @@
 import 'package:e_library/common/themes/app_theme.dart';
+import 'package:e_library/presentation/book_detail/cubits/add_book_to_favorite_cubit/add_book_to_favorite_cubit.dart';
+import 'package:e_library/presentation/book_detail/cubits/book_detail_cubit/book_detail_cubit.dart';
+import 'package:e_library/presentation/explore/cubits/book_cubit/book_cubit.dart';
+import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_book_cubit.dart';
+import 'package:e_library/presentation/explore/cubits/upload_book_cubit/upload_book_cubit.dart';
 import 'package:e_library/presentation/onboarding/cubits/cubit/create_new_user_cubit.dart';
 import 'package:e_library/presentation/splash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +18,21 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => CreateNewUserCubit(),
+        ),
+        BlocProvider(
+          create: (context) => UploadBookCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BookCubit(),
+        ),
+        BlocProvider(
+          create: (context) => QueryBookCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BookDetailCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AddBookToFavoriteCubit(),
         ),
       ],
       child: MaterialApp(
