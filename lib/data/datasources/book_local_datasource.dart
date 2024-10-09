@@ -51,6 +51,19 @@ class BookLocalDatasource {
     return BookModel.fromMap(books.first);
   }
 
+  Future<List<BookModel>> getFavoriteBooks() async {
+    Database db = await DatabaseHelper.instance.database;
+    return (await db.query('books', where: 'is_favorited = 1'))
+        .map((book) => BookModel.fromMap(book))
+        .toList();
+  }
+
+  Future<int> addFavoriteBook(int id, int value) async {
+    Database db = await DatabaseHelper.instance.database;
+    return await db.update('books', {'is_favorited': value},
+        where: 'id = ?', whereArgs: [id]);
+  }
+
   Future<int> updateBook(BookModel book, int id) async {
     Database db = await DatabaseHelper.instance.database;
     return await db

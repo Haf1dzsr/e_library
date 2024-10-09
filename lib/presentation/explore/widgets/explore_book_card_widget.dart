@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/data/models/book_model.dart';
-import 'package:e_library/presentation/explore/screens/book_detail_screen.dart';
+import 'package:e_library/presentation/book_detail/screens/book_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class ExploreBookCardWidget extends StatelessWidget {
@@ -21,7 +21,7 @@ class ExploreBookCardWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => BookDetailScreen(book: book),
+            builder: (context) => BookDetailScreen(id: book.id!),
           ),
         );
       },
@@ -90,7 +90,8 @@ class ExploreBookCardWidget extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BookDetailScreen(book: book),
+                            builder: (context) =>
+                                BookDetailScreen(id: book.id!),
                           ),
                         );
                       },
