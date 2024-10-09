@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_library/common/constants/images.dart';
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
@@ -7,6 +9,7 @@ import 'package:e_library/presentation/explore/screens/upload_book_screen.dart';
 import 'package:e_library/presentation/explore/widgets/category_widget.dart';
 import 'package:e_library/presentation/explore/widgets/explore_book_card_widget.dart';
 import 'package:e_library/presentation/explore/widgets/newest_book_card_widget.dart';
+import 'package:e_library/presentation/profile/cubits/profile_cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,6 +39,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     super.initState();
     context.read<BookCubit>().getNewestBooks();
     context.read<QueryBookCubit>().getExploreBooks(selectedGenre.value);
+    context.read<ProfileCubit>().getUserProfile();
   }
 
   @override
@@ -46,79 +50,197 @@ class _ExploreScreenState extends State<ExploreScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                alignment: Alignment.center,
-                height: MediaQuery.sizeOf(context).height / 4,
-                padding: const EdgeInsets.only(left: 16),
-                decoration: const BoxDecoration(
-                  color: AppColor.primary,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(96),
-                  ),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipOval(
-                      child: Image.asset(
-                        Images.avatar,
-                        color: AppColor.white,
-                        fit: BoxFit.cover,
-                        height: MediaQuery.sizeOf(context).height / 14,
-                        width: MediaQuery.sizeOf(context).width / 7,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 0.7,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hi, Hafidz Surya Ramadhan',
-                            maxLines: 1,
-                            overflow: TextOverflow.visible,
-                            style: appTheme.textTheme.headlineMedium!.copyWith(
-                              color: AppColor.white,
-                            ),
+              BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColor.primary,
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'hafidzsr@icloud.com',
-                            maxLines: 1,
-                            overflow: TextOverflow.visible,
-                            style: appTheme.textTheme.bodyMedium!.copyWith(
-                              color: AppColor.white,
-                            ),
+                        ),
+                      );
+                    },
+                    loaded: (user) {
+                      return Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.sizeOf(context).height / 4,
+                        padding: const EdgeInsets.only(left: 16),
+                        decoration: const BoxDecoration(
+                          color: AppColor.primary,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(96),
                           ),
-                          const SizedBox(height: 8),
-                          SizedBox(
-                            height: 50,
-                            width: MediaQuery.sizeOf(context).width * 0.3,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    AppColor.primary.withOpacity(0.1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipOval(
+                              child: user.photo != ''
+                                  ? Image.file(
+                                      File(user.photo!),
+                                      fit: BoxFit.cover,
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.2,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return const Icon(
+                                            Icons.image_not_supported_rounded);
+                                      },
+                                    )
+                                  : Image.asset(
+                                      Images.avatar,
+                                      color: AppColor.white,
+                                      fit: BoxFit.cover,
+                                      height:
+                                          MediaQuery.sizeOf(context).height /
+                                              14,
+                                      width:
+                                          MediaQuery.sizeOf(context).width / 7,
+                                    ),
+                            ),
+                            const SizedBox(width: 12),
+                            SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.7,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Hi, ${user.name}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                    style: appTheme.textTheme.headlineMedium!
+                                        .copyWith(
+                                      color: AppColor.white,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    user.email,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                    style:
+                                        appTheme.textTheme.bodyMedium!.copyWith(
+                                      color: AppColor.white.withOpacity(0.8),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  SizedBox(
+                                    height: 50,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.3,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            AppColor.primary.withOpacity(0.1),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Go to profile',
+                                        style: appTheme.textTheme.labelMedium!
+                                            .copyWith(
+                                          color: AppColor.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              onPressed: () {},
-                              child: Text(
-                                'Go to profile',
-                                style: appTheme.textTheme.labelMedium!.copyWith(
-                                  color: AppColor.white,
-                                ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    orElse: () {
+                      return Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.sizeOf(context).height / 4,
+                        padding: const EdgeInsets.only(left: 16),
+                        decoration: const BoxDecoration(
+                          color: AppColor.primary,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(96),
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipOval(
+                              child: Image.asset(
+                                Images.avatar,
+                                color: AppColor.white,
+                                fit: BoxFit.cover,
+                                height: MediaQuery.sizeOf(context).height / 14,
+                                width: MediaQuery.sizeOf(context).width / 7,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                            const SizedBox(width: 12),
+                            SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.7,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Hi',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                    style: appTheme.textTheme.headlineMedium!
+                                        .copyWith(
+                                      color: AppColor.white,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'youremail@icloud.com',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                    style:
+                                        appTheme.textTheme.bodyMedium!.copyWith(
+                                      color: AppColor.white.withOpacity(0.8),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  SizedBox(
+                                    height: 50,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.3,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            AppColor.primary.withOpacity(0.1),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Go to profile',
+                                        style: appTheme.textTheme.labelMedium!
+                                            .copyWith(
+                                          color: AppColor.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
               const SizedBox(height: 24),
               Padding(
