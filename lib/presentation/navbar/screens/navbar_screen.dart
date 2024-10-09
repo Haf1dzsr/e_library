@@ -1,6 +1,7 @@
 import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/presentation/explore/screens/explore_screen.dart';
 import 'package:e_library/presentation/favorite/screens/favorite_screen.dart';
+import 'package:e_library/presentation/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavbarScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class NavbarScreen extends StatelessWidget {
 
   final List<Widget> _pages = [
     const ExploreScreen(),
-    const Center(child: Text('Search')),
+    const SearchScreen(),
     const FavoriteScreen(),
     const Center(child: Text('Profile')),
   ];

@@ -23,6 +23,14 @@ class BookLocalDatasource {
         .toList();
   }
 
+  Future<List<BookModel>> getBooksByQuery(String query) async {
+    Database db = await DatabaseHelper.instance.database;
+    return (await db
+            .query('books', where: 'title LIKE ?', whereArgs: ['%$query%']))
+        .map((book) => BookModel.fromMap(book))
+        .toList();
+  }
+
   Future<List<BookModel>> getBooksByGenre(String genre) async {
     Database db = await DatabaseHelper.instance.database;
 

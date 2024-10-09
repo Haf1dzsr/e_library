@@ -8,9 +8,10 @@ class CustomTextFormField extends StatefulWidget {
   final bool? obscureText;
   final TextEditingController controller;
   final IconButton? suffixIcon;
+  final Icon? prefixIcon;
   final int? maxLength;
   final TextInputAction textInputAction;
-  final Function(String?)? onChanged;
+  final Function(String)? onChanged;
   final String? helperText;
   final TextInputType? keyboardType;
   final int? maxLines;
@@ -27,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
     this.obscureText = false,
     required this.controller,
     this.suffixIcon,
+    this.prefixIcon,
     this.maxLength,
     this.onChanged,
     this.helperText,
@@ -77,16 +79,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.label!,
-                  style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                        color: isError || widget.isError!
-                            ? AppColor.error
-                            : isFocused
-                                ? AppColor.primary
-                                : AppColor.grey,
+                widget.label == null
+                    ? const SizedBox.shrink()
+                    : Text(
+                        widget.label!,
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                              color: isError || widget.isError!
+                                  ? AppColor.error
+                                  : isFocused
+                                      ? AppColor.primary
+                                      : AppColor.grey,
+                            ),
                       ),
-                ),
                 TextFormField(
                   readOnly: widget.readOnly!,
                   controller: widget.controller,
@@ -96,7 +100,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   textInputAction: widget.textInputAction,
                   focusNode: _focusNode,
                   keyboardType: widget.keyboardType,
-                  onChanged: widget.onChanged,
                   style: const TextStyle(
                     color: AppColor.grey,
                   ),
@@ -153,6 +156,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       color: AppColor.error,
                     ),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
+                    prefixIcon: widget.prefixIcon,
                     suffixIcon: widget.suffixIcon,
                     suffixIconColor: isError || widget.isError!
                         ? AppColor.error
@@ -163,6 +167,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       ? (value) {
                           _isError.value = widget.validator!(value) != null;
                           return widget.validator!(value);
+                        }
+                      : null,
+                  onChanged: widget.onChanged != null
+                      ? (value) {
+                          _isError.value = widget.onChanged!(value) != null;
+                          widget.onChanged!(value);
                         }
                       : null,
                 ),
