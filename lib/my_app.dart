@@ -6,6 +6,7 @@ import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_boo
 import 'package:e_library/presentation/explore/cubits/upload_book_cubit/upload_book_cubit.dart';
 import 'package:e_library/presentation/favorite/cubits/favorite_book_cubit/favorite_book_cubit.dart';
 import 'package:e_library/presentation/onboarding/cubits/cubit/create_new_user_cubit.dart';
+import 'package:e_library/presentation/search/cubits/search_book_cubit/search_book_cubit.dart';
 import 'package:e_library/presentation/splash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,6 +38,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FavoriteBookCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SearchBookCubit(),
         ),
       ],
       child: MaterialApp(
