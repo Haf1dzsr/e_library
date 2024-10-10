@@ -56,6 +56,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         emit(ProfileState.imagePicked(File(pickedFile.path)));
       } else {
         emit(const ProfileState.imageNotPicked('Image not picked'));
+        await getUserProfile();
       }
     } catch (e) {
       emit(ProfileState.error('Failed to pick image: $e'));

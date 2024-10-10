@@ -1,6 +1,7 @@
 import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/presentation/book_detail/cubits/add_book_to_favorite_cubit/add_book_to_favorite_cubit.dart';
 import 'package:e_library/presentation/book_detail/cubits/book_detail_cubit/book_detail_cubit.dart';
+import 'package:e_library/presentation/book_detail/cubits/edit_book_cubit/edit_book_cubit.dart';
 import 'package:e_library/presentation/explore/cubits/book_cubit/book_cubit.dart';
 import 'package:e_library/presentation/explore/cubits/query_book_cubit/query_book_cubit.dart';
 import 'package:e_library/presentation/explore/cubits/upload_book_cubit/upload_book_cubit.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => BookDetailCubit(),
+        ),
+        BlocProvider(
+          create: (context) => EditBookCubit(),
         ),
         BlocProvider(
           create: (context) => AddBookToFavoriteCubit(),

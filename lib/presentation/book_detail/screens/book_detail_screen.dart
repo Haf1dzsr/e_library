@@ -4,6 +4,7 @@ import 'package:e_library/common/themes/app_color.dart';
 import 'package:e_library/common/themes/app_theme.dart';
 import 'package:e_library/presentation/book_detail/cubits/add_book_to_favorite_cubit/add_book_to_favorite_cubit.dart';
 import 'package:e_library/presentation/book_detail/cubits/book_detail_cubit/book_detail_cubit.dart';
+import 'package:e_library/presentation/book_detail/screens/edit_book_screen.dart';
 import 'package:e_library/presentation/book_detail/widgets/info_tile_widget.dart';
 import 'package:e_library/presentation/book_detail/widgets/vertical_divider_widget.dart';
 import 'package:e_library/presentation/favorite/cubits/favorite_book_cubit/favorite_book_cubit.dart';
@@ -48,6 +49,41 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             fontSize: 16,
           ),
         ),
+        actions: [
+          BlocBuilder<BookDetailCubit, BookDetailState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                loaded: (book) {
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.edit,
+                      size: 24,
+                      color: AppColor.primary,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditBookScreen(book: book),
+                        ),
+                      );
+                    },
+                  );
+                },
+                orElse: () {
+                  return IconButton(
+                    icon: const Icon(
+                      Icons.edit,
+                      size: 24,
+                      color: AppColor.primary,
+                    ),
+                    onPressed: () {},
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: BlocBuilder<BookDetailCubit, BookDetailState>(
         builder: (context, state) {
